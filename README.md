@@ -4,7 +4,18 @@
 - configure tailwind css
 - Header
 - Login form
+- Routing of app
 - Sign up form
+- Form Validation
+- UseRef hook
+- Firebase setup
+- Deploying app to production
+- Create a signup user account
+- Implement sign in user API
+- Created Redux store with user slice.
+- Implemented Signout
+- Update profile API call.
+- Build Movies Fetch movies from TMDB.
 
 # Features
 
@@ -23,3 +34,7 @@
 - Netflix gpt
   - Search bar
   - movie suggestions
+
+# Application link
+
+- https://netflixgpt-dd85d.web.app
