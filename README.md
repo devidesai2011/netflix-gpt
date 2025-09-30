@@ -15,7 +15,12 @@
 - Created Redux store with user slice.
 - Implemented Signout
 - Update profile API call.
+- Bugfix: if the user is not logged in Redirect/browse to login page vice-versa
+- unsubscribe to the on auth state change callback.
+- Add hardcoded values to the constant files.
 - Build Movies Fetch movies from TMDB.
+- Register on TMDB api and create an app and get access token.
+- Get Data from TMDB now playing movie list API.
 
 # Features
 
