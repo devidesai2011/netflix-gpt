@@ -1,21 +1,45 @@
 // Add this to your public/index.html <head> for the font:
 // <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
 
+import { useState } from 'react';
+
 const VideoTitle = ({ title, overview }) => {
+    const [isHovered, setIsHovered] = useState(false);
+
     return (
-        <div className="pt-36 px-10">
-            <h1
-                className="text-[5rem] font-bold mb-4 text-left text-blue-900"
-                style={{
-                    fontFamily: "'Cinzel Decorative', serif",
-                    letterSpacing: "0.08em",
-                    textShadow: "0 0 40px #FFF8C6, 0 0 8px #FFF8C6, 0 0 2px #FFF8C6, 60px 0 40px #FFF8C6, -60px 0 40px #FFF8C6"
-                }}
-            >
-                {title}
-            </h1>
-            <p className="text-lg mb-8 text-left opacity-90 w-3/12">{overview}</p>
-            <div className="flex gap-4 mt-4">
+        <div className="pt-[20%] px-24 absolute bg-gradient-to-r from-black to-transparent w-screen aspect-video">
+            {/* Title Section - positioned above buttons */}
+            <div className={`relative transition-all duration-500 ease-in-out ${isHovered ? 'mb-16' : 'mb-6'}`}>
+                <div
+                    className="cursor-pointer relative"
+                    onMouseEnter={() => setIsHovered(true)}
+                    onMouseLeave={() => setIsHovered(false)}
+                >
+                    {/* Title */}
+                    <h1
+                        className={`text-[4rem] font-bold text-left text-yellow-400 transition-all duration-500 ease-in-out ${isHovered ? 'transform -translate-y-8' : 'transform translate-y-0'
+                            }`}
+                        style={{
+                            fontFamily: "'Cinzel Decorative', serif",
+                            letterSpacing: "0.08em",
+                            textShadow: "0 0 40px #FFF8C6, 0 0 8px #FFF8C6, 0 0 2px #FFF8C6, 60px 0 40px #FFF8C6, -60px 0 40px #FFF8C6"
+                        }}
+                    >
+                        {title}
+                    </h1>
+
+                    {/* Paragraph - revealed when title moves up */}
+                    <div className={`overflow-hidden transition-all duration-500 ease-in-out ${isHovered ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'
+                        }`}>
+                        <p className="text-base text-left w-6/12 text-white mt-2 leading-normal">
+                            {overview}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            {/* Buttons Section */}
+            <div className="flex gap-2">
                 <button type="button" className="flex items-center px-6 py-3 bg-white text-black font-semibold rounded hover:bg-gray-200 transition">
                     <svg className="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
                     Play

@@ -1,26 +1,13 @@
-import { useEffect } from "react";
-import { API_OPTIONS } from "../utils/constants";
+import { useSelector } from "react-redux";
+import useMovieTrailer from "../hooks/useMovieTrailer";
 
 const VideoBackground = ({ movieId }) => {
-    // Fetch trailer video from TMDB API and display it as background for this I need movie Id
-    const getTrailer = async () => {
-        const data = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`, API_OPTIONS)
-        const jsonData = await data.json();
-        console.log(jsonData);
-        let trailer = jsonData.results.find(video => video.type === "Trailer" && video.site === "YouTube");
-        if (!trailer) {
-            trailer = jsonData.results[0];
-        }
-        // This trailer will have a youtube video key
-        // Every youtube video has a key.
-    }
-
-    useEffect(() => {
-        getTrailer();
-    }, []);
+    const trailerVideo = useSelector((state) => state?.movies?.trailerVideo);
+    // Fetch trailer video from TMDB API and update store with the trailer video key.
+    useMovieTrailer(movieId);
     return (
-        <div>
-
+        <div className="">
+            <iframe className="w-full aspect-video" src={"https://www.youtube.com/embed/" + trailerVideo?.key + "?si=kD8UqhJwmZ30b7dj&autoplay=1&mute=1"} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin"></iframe>
         </div>
     );
 };

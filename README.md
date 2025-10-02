@@ -21,6 +21,14 @@
 - Build Movies Fetch movies from TMDB.
 - Register on TMDB api and create an app and get access token.
 - Get Data from TMDB now playing movie list API.
+- Custom hook for now playing movies.
+- Create movieSlice
+- Update store with movie data
+- Planning for mainContainer and SecondaryContainer
+- Fetch data for trailer video
+- update store with Trailer Video data.
+- Embeded the youtube video and make it autoplay and mute.
+- Build secondary component.
 
 # Features
 
