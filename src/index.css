@@ -1,3 +1,67 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Global body and html scrollbar hiding */
+html, body {
+    overflow-x: hidden;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    background: transparent !important;
+}
+
+.scrollbar-hide::-webkit-scrollbar-track {
+    display: none !important;
+    background: transparent !important;
+}
+
+.scrollbar-hide::-webkit-scrollbar-thumb {
+    display: none !important;
+    background: transparent !important;
+}
+
+.scrollbar-hide::-webkit-scrollbar-corner {
+    display: none !important;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.scrollbar-hide {
+    -ms-overflow-style: none !important;  /* IE and Edge */
+    scrollbar-width: none !important;  /* Firefox */
+    overflow: -moz-scrollbars-none !important;  /* Firefox older versions */
+}
+
+/* Additional global scrollbar hiding */
+.no-scrollbar::-webkit-scrollbar {
+    display: none !important;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
+}
+
+/* Force hide all horizontal scrollbars globally */
+*::-webkit-scrollbar:horizontal {
+    display: none !important;
+    height: 0 !important;
+}
+
+/* Specific movie list container */
+.movie-scroll-container {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.movie-scroll-container::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
