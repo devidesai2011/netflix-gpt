@@ -7,11 +7,15 @@ import { useSelector } from 'react-redux';
 import { onAuthStateChanged } from "firebase/auth";
 import { addUser, removeUser } from '../utils/store/userSlice';
 import { NETFLIX_TEXT, NETFLIX_LOGIN_LOGO } from '../utils/constants';
+import { toggleGptSearchView } from '../utils/store/gptSlice';
+import { SUPPORTED_LANGUAGES } from '../utils/constants';
+import { changeLanguage } from '../utils/store/configSlice';
 
 const Header = () => {
     const dispatch = useDispatch();
     const [showDropdown, setShowDropdown] = useState(false);
     const navigate = useNavigate();
+    const showGptSearch = useSelector((state) => state.gpt.showGptSearch);
 
     useEffect(() => {
 
@@ -46,8 +50,9 @@ const Header = () => {
         setShowDropdown(!showDropdown);
     };
 
-    const handleManageProfile = () => {
-        console.log("Manage Profile clicked");
+    const handleGPTSearch = () => {
+        //Toggle my GPT search button.
+        dispatch(toggleGptSearchView());
         setShowDropdown(false);
     };
 
@@ -69,11 +74,26 @@ const Header = () => {
         });
     };
 
+    const handleLanguageChange = (e) => {
+        dispatch(changeLanguage(e.target.value));
+        console.log("Language changed to:", e.target.value);
+    };
+
     return (
         <div className='absolute px-8 py-4 bg-gradient-to-b from-black z-10 width-screen flex w-full justify-between'>
             <img className='w-44' src={NETFLIX_TEXT} alt="Netflix Logo" />
 
             {isUserLoggedIn && <div className='flex items-center p-2 relative'>
+                {/* Language Selector */}
+                {showGptSearch && <select
+                    onChange={handleLanguageChange}
+                    className='mr-4 px-3 py-1 bg-gray-800 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 cursor-pointer hover:bg-gray-700 transition-colors duration-200'
+                >
+                    {SUPPORTED_LANGUAGES.map((lang) => (
+                        <option key={lang.code} value={lang.code}>{lang.label}</option>
+                    ))}
+                </select>}
+
                 <img
                     className='w-8 h-8 rounded'
                     src={NETFLIX_LOGIN_LOGO}
@@ -98,10 +118,10 @@ const Header = () => {
                 {showDropdown && (
                     <div className='absolute top-12 right-0 bg-black bg-opacity-90 text-white rounded-md shadow-lg py-2 w-48 z-50'>
                         <button
-                            onClick={handleManageProfile}
+                            onClick={handleGPTSearch}
                             className='block w-full text-left px-4 py-2 hover:bg-gray-700 transition-colors duration-200'
                         >
-                            Manage Profile
+                            GPT search
                         </button>
                         <button
                             onClick={handleAccount}

@@ -29,6 +29,15 @@
 - update store with Trailer Video data.
 - Embeded the youtube video and make it autoplay and mute.
 - Build secondary component.
+- Build movie list
+- Build movie card
+- TMDB image CDN.
+- Made the browse page look better.
+- made multiple custom hooks
+- GPT search feature.
+- GPT search page
+- Gpt search bar
+- Mutli language feature in out app.
 
 # Features
 
