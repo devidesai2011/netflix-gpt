@@ -5,8 +5,11 @@ import SecondaryContainer from './SecondaryContainer';
 import usePopularMovies from '../hooks/usePopularMovies';
 import useTopRated from '../hooks/useTopRated';
 import useUpcomingMovies from '../hooks/useUpcomingMovies';
+import GptSearchComponent from './GptSearchComponent';
+import { useSelector } from 'react-redux';
 
 const Browse = () => {
+    const showGptSearch = useSelector((state) => state.gpt.showGptSearch);
     useNowPlayingMovies();
     usePopularMovies();
     useTopRated();
@@ -14,8 +17,12 @@ const Browse = () => {
     return (
         <div className="overflow-x-hidden">
             <Header />
-            <MainContainer />
-            <SecondaryContainer />
+            {showGptSearch ? <GptSearchComponent /> : (
+                <>
+                    <MainContainer />
+                    <SecondaryContainer />
+                </>
+            )}
             {/* Browse
             Main video container has 
                 -video background
