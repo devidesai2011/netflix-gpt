@@ -38,6 +38,7 @@
 - GPT search page
 - Gpt search bar
 - Mutli language feature in out app.
+- Instead of using open AI user Gemini AI.
 
 # Features
 

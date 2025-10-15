@@ -1,7 +1,6 @@
 import MovieCard from "./MovieCard"
 
 const MovieList = ({ title, movies }) => {
-    console.log(movies);
     return (
         <div className="px-6 py-4 overflow-hidden">
             <h1 className="text-xl md:text-2xl font-semibold text-white mb-4 pb-2">{title}</h1>
@@ -9,7 +8,7 @@ const MovieList = ({ title, movies }) => {
                 {
                     movies && movies.length > 0 ? (
                         movies.map((movie) => (
-                            <MovieCard key={movie.id} posterPath={movie.poster_path} />
+                            <MovieCard key={movie.id} posterPath={movie.poster_path} movie={movie} />
                         ))
                     ) : (
                         <p className="text-white">No movies available</p>

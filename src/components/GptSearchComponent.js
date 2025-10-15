@@ -5,20 +5,21 @@ import { NETFLIX_SIGNIN_PAGE_IMAGE_URL } from '../utils/constants';
 
 const GptSearchComponent = () => {
     return (
-        <div>
-            {/* GPT search bar
-            <GptSearchBar />
-                Gpt movie suggestions
-            */}
-            <div>
-                <div className="absolute">
-                    <img src={NETFLIX_SIGNIN_PAGE_IMAGE_URL} alt="Netflix background" />
-                </div>
+        <div className="min-h-screen relative">
+            {/* Background Image - Lower z-index */}
+            <div className="absolute inset-0 z-0">
+                <img
+                    src={NETFLIX_SIGNIN_PAGE_IMAGE_URL}
+                    alt="Netflix background"
+                    className="w-full h-full object-cover"
+                />
+            </div>
+
+            {/* Content - Higher z-index */}
+            <div className="relative z-10">
                 <GptSearchBar />
                 <GptMovieSuggestions />
             </div>
-
-
         </div>
     )
 }

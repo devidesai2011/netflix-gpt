@@ -16,3 +16,7 @@ export const SUPPORTED_LANGUAGES = [
     { code: 'hindi', label: 'Hindi' },
     { code: 'gujarati', label: 'Gujarati' }
 ];
+
+export const OPEN_AI_KEY = process.env.REACT_APP_OPENAI_API_KEY;
+
+export const GEMINI_API_KEY = process.env.REACT_APP_GEMINI_API_KEY;
