@@ -28,7 +28,12 @@ const Header = () => {
                 // https://firebase.google.com/docs/reference/js/auth.user
                 const { uid, email, displayName } = user;
                 dispatch(addUser({ uid: uid, email: email, displayName: displayName }));
-                navigate('/browse');
+
+                // Only navigate to /browse if user is on login page or root page
+                const currentPath = window.location.pathname;
+                if (currentPath === '/' || currentPath === '/login') {
+                    navigate('/browse');
+                }
             } else {
                 // User is signed out
                 dispatch(removeUser());
@@ -40,7 +45,7 @@ const Header = () => {
         return () => {
             unsubscribe();
         }
-    }, []);
+    }, [navigate, dispatch]);
 
     // GetData from useSelector to check if user is logged in
     const user = useSelector((state) => state.user);
@@ -53,11 +58,13 @@ const Header = () => {
     const handleGPTSearch = () => {
         //Toggle my GPT search button.
         dispatch(toggleGptSearchView());
+        !showGptSearch && navigate('/browse');
         setShowDropdown(false);
     };
 
-    const handleAccount = () => {
-        console.log("Account clicked");
+    const handleHome = () => {
+        showGptSearch && dispatch(toggleGptSearchView());
+        navigate('/browse');
         setShowDropdown(false);
     };
 
@@ -80,14 +87,14 @@ const Header = () => {
     };
 
     return (
-        <div className='absolute px-8 py-4 bg-gradient-to-b from-black z-10 width-screen flex w-full justify-between'>
+        <div className='absolute px-8 py-4 bg-gradient-to-b from-black z-50 width-screen flex w-full justify-between'>
             <img className='w-44' src={NETFLIX_TEXT} alt="Netflix Logo" />
 
-            {isUserLoggedIn && <div className='flex items-center p-2 relative'>
+            {isUserLoggedIn && <div className='flex items-center p-2 relative z-50'>
                 {/* Language Selector */}
                 {showGptSearch && <select
                     onChange={handleLanguageChange}
-                    className='mr-4 px-3 py-1 bg-gray-800 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 cursor-pointer hover:bg-gray-700 transition-colors duration-200'
+                    className='mr-4 px-3 py-1 bg-gray-800 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 cursor-pointer hover:bg-gray-700 transition-colors duration-200 z-50 relative'
                 >
                     {SUPPORTED_LANGUAGES.map((lang) => (
                         <option key={lang.code} value={lang.code}>{lang.label}</option>
@@ -116,7 +123,7 @@ const Header = () => {
 
                 {/* Dropdown Menu */}
                 {showDropdown && (
-                    <div className='absolute top-12 right-0 bg-black bg-opacity-90 text-white rounded-md shadow-lg py-2 w-48 z-50'>
+                    <div className='absolute top-12 right-0 bg-black bg-opacity-90 text-white rounded-md shadow-lg py-2 w-48 z-[9999]'>
                         <button
                             onClick={handleGPTSearch}
                             className='block w-full text-left px-4 py-2 hover:bg-gray-700 transition-colors duration-200'
@@ -124,10 +131,10 @@ const Header = () => {
                             GPT search
                         </button>
                         <button
-                            onClick={handleAccount}
+                            onClick={handleHome}
                             className='block w-full text-left px-4 py-2 hover:bg-gray-700 transition-colors duration-200'
                         >
-                            Account
+                            Home
                         </button>
                         <hr className='border-gray-600 my-1' />
                         <button
