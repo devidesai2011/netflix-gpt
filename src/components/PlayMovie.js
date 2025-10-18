@@ -10,11 +10,25 @@ const PlayMovie = () => {
     const location = useLocation();
     const { movie } = location.state || {}; // Get movie data from navigation state
 
+    console.log('PlayMovie - movieId:', movieId);
+    console.log('PlayMovie - movie data:', movie);
+
     useMovieTrailer(movieId);
     const trailerVideo = useSelector((state) => state?.movies?.trailerVideo);
     const movies = useSelector((store) => store.movies);
+
+    console.log('PlayMovie - trailerVideo:', trailerVideo);
+
     if (!movies) {
-        return <div>Loading...</div>; // or some loading indicator
+        return <div className="flex items-center justify-center h-screen">
+            <div className="text-white">Loading movies...</div>
+        </div>;
+    }
+
+    if (!movieId) {
+        return <div className="flex items-center justify-center h-screen">
+            <div className="text-white">No movie ID provided</div>
+        </div>;
     }
 
     return (
@@ -22,13 +36,23 @@ const PlayMovie = () => {
             <div className="overflow-hidden relative h-screen">
                 <Header />
                 <div className="pt-16 sm:pt-20 md:pt-24">
-                    <iframe
-                        className="w-full aspect-video"
-                        src={"https://www.youtube.com/embed/" + trailerVideo?.key + "?si=kD8UqhJwmZ30b7dj&autoplay=1&mute=0"}
-                        title="YouTube video player"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        referrerPolicy="strict-origin-when-cross-origin">
-                    </iframe>
+                    {trailerVideo?.key ? (
+                        <iframe
+                            className="w-full aspect-video"
+                            src={`https://www.youtube.com/embed/${trailerVideo.key}?si=kD8UqhJwmZ30b7dj&autoplay=1&mute=0`}
+                            title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerPolicy="strict-origin-when-cross-origin">
+                        </iframe>
+                    ) : (
+                        <div className="w-full aspect-video bg-gray-900 flex items-center justify-center">
+                            <div className="text-white text-center">
+                                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
+                                <p>Loading trailer...</p>
+                                {movieId && <p className="text-sm text-gray-400">Movie ID: {movieId}</p>}
+                            </div>
+                        </div>
+                    )}
                 </div>
 
                 {/* Movie Information Section */}
