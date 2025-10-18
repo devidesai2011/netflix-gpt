@@ -58,7 +58,8 @@ const Header = () => {
     const handleGPTSearch = () => {
         //Toggle my GPT search button.
         dispatch(toggleGptSearchView());
-        !showGptSearch && navigate('/browse');
+        // Always navigate to /browse when GPT search is clicked
+        navigate('/browse');
         setShowDropdown(false);
     };
 
@@ -87,14 +88,14 @@ const Header = () => {
     };
 
     return (
-        <div className='absolute px-8 py-4 bg-gradient-to-b from-black z-50 width-screen flex w-full justify-between'>
-            <img className='w-44' src={NETFLIX_TEXT} alt="Netflix Logo" />
+        <div className='absolute px-4 sm:px-6 md:px-8 py-3 sm:py-4 bg-gradient-to-b from-black z-50 w-full flex justify-between items-center'>
+            <img className='w-24 sm:w-32 md:w-40 lg:w-44' src={NETFLIX_TEXT} alt="Netflix Logo" />
 
-            {isUserLoggedIn && <div className='flex items-center p-2 relative z-50'>
+            {isUserLoggedIn && <div className='flex items-center gap-2 sm:gap-3 md:gap-4 relative z-50'>
                 {/* Language Selector */}
                 {showGptSearch && <select
                     onChange={handleLanguageChange}
-                    className='mr-4 px-3 py-1 bg-gray-800 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 cursor-pointer hover:bg-gray-700 transition-colors duration-200 z-50 relative'
+                    className='px-2 sm:px-3 py-1 bg-gray-800 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 cursor-pointer hover:bg-gray-700 transition-colors duration-200 z-50 relative text-xs sm:text-sm'
                 >
                     {SUPPORTED_LANGUAGES.map((lang) => (
                         <option key={lang.code} value={lang.code}>{lang.label}</option>
@@ -102,7 +103,7 @@ const Header = () => {
                 </select>}
 
                 <img
-                    className='w-8 h-8 rounded'
+                    className='w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded'
                     src={NETFLIX_LOGIN_LOGO}
                     alt="userIcon"
                 />
@@ -113,7 +114,7 @@ const Header = () => {
                     className='ml-1 text-white hover:text-gray-300 transition-colors duration-200'
                 >
                     <svg
-                        className={`w-4 h-4 transform transition-transform duration-200 ${showDropdown ? 'rotate-180' : ''}`}
+                        className={`w-3 h-3 sm:w-4 sm:h-4 transform transition-transform duration-200 ${showDropdown ? 'rotate-180' : ''}`}
                         fill="currentColor"
                         viewBox="0 0 20 20"
                     >
@@ -123,23 +124,23 @@ const Header = () => {
 
                 {/* Dropdown Menu */}
                 {showDropdown && (
-                    <div className='absolute top-12 right-0 bg-black bg-opacity-90 text-white rounded-md shadow-lg py-2 w-48 z-[9999]'>
+                    <div className='absolute top-10 sm:top-12 right-0 bg-black bg-opacity-90 text-white rounded-md shadow-lg py-2 w-40 sm:w-44 md:w-48 z-[9999]'>
                         <button
                             onClick={handleGPTSearch}
-                            className='block w-full text-left px-4 py-2 hover:bg-gray-700 transition-colors duration-200'
+                            className='block w-full text-left px-3 sm:px-4 py-2 hover:bg-gray-700 transition-colors duration-200 text-sm sm:text-base'
                         >
                             GPT search
                         </button>
                         <button
                             onClick={handleHome}
-                            className='block w-full text-left px-4 py-2 hover:bg-gray-700 transition-colors duration-200'
+                            className='block w-full text-left px-3 sm:px-4 py-2 hover:bg-gray-700 transition-colors duration-200 text-sm sm:text-base'
                         >
                             Home
                         </button>
                         <hr className='border-gray-600 my-1' />
                         <button
                             onClick={handleSignOut}
-                            className='block w-full text-left px-4 py-2 hover:bg-gray-700 transition-colors duration-200'
+                            className='block w-full text-left px-3 sm:px-4 py-2 hover:bg-gray-700 transition-colors duration-200 text-sm sm:text-base'
                         >
                             Sign Out
                         </button>

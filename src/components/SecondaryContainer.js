@@ -4,7 +4,7 @@ const SecondaryContainer = () => {
     const movies = useSelector((store) => store.movies);
     return (
         movies && (
-            <div className="bg-black ">
+            <div className="bg-black">
                 {/* Content goes here
 
                     Movie list - Popular
@@ -12,7 +12,7 @@ const SecondaryContainer = () => {
                     Movie list - Top Rated
                 Movie list - Upcoming
             */}
-                <div className="-mt-52 z-20 pl-12 relative">
+                <div className="-mt-32 sm:-mt-40 md:-mt-48 lg:-mt-52 z-20 pl-4 sm:pl-6 md:pl-8 lg:pl-12 relative">
                     <MovieList title="Now Playing" movies={movies.nowPlayingMovies} />
                     <MovieList title="Popular movies" movies={movies.popularMovies} />
                     <MovieList title="Top Rated" movies={movies.topRatedMovies} />

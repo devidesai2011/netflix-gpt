@@ -15,11 +15,11 @@ const MovieCard = ({ posterPath, movie }) => {
         });
     }
     return (
-        <div className="w-40 md:w-48 flex-shrink-0 cursor-pointer transform hover:scale-105 transition-transform duration-200">
+        <div className="w-20 h-20 sm:w-32 sm:h-auto md:w-36 lg:w-40 xl:w-44 flex-shrink-0 cursor-pointer transform hover:scale-105 transition-transform duration-200">
             <img
                 src={IMG_CDN_URL + posterPath}
                 alt="Movie Card"
-                className="w-full h-auto rounded-md shadow-lg"
+                className="w-full h-full object-cover rounded-md shadow-lg"
                 onClick={handleMovieItemClick}
             />
         </div>
