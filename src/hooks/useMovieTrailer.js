@@ -1,11 +1,10 @@
 import { useEffect, useCallback } from "react";
 import { API_OPTIONS } from "../utils/constants";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addTrailerVideo } from "../utils/store/movieSlice";
 
 const useMovieTrailer = (movieId) => {
     const dispatch = useDispatch();
-    const trailerVideo = useSelector((store) => store.movies.trailerVideo);
     // Use useCallback to memoize the function and prevent unnecessary re-renders
     const getTrailer = useCallback(async () => {
         if (!movieId) return; // Don't fetch if movieId is not available
@@ -21,8 +20,12 @@ const useMovieTrailer = (movieId) => {
     }, [movieId, dispatch]);
 
     useEffect(() => {
-        !trailerVideo && getTrailer();
-    }, [getTrailer]);
+        if (movieId) {
+            // Clear previous trailer and fetch new one for each movie
+            dispatch(addTrailerVideo(null));
+            getTrailer();
+        }
+    }, [movieId, getTrailer, dispatch]);
 }
 
 export default useMovieTrailer;
