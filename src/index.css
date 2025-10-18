@@ -7,6 +7,9 @@ html, body {
     overflow-x: hidden;
 }
 
+/* Responsive font imports */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap');
+
 /* Hide scrollbar for Chrome, Safari and Opera */
 .scrollbar-hide::-webkit-scrollbar {
     display: none !important;
@@ -58,10 +61,58 @@ html, body {
     overflow-y: hidden;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    /* Smooth scrolling on mobile */
+    -webkit-overflow-scrolling: touch;
 }
 
 .movie-scroll-container::-webkit-scrollbar {
     display: none !important;
     width: 0 !important;
     height: 0 !important;
+}
+
+/* Responsive utilities */
+@layer utilities {
+    .text-responsive {
+        @apply text-sm sm:text-base md:text-lg lg:text-xl;
+    }
+    
+    .padding-responsive {
+        @apply p-2 sm:p-3 md:p-4 lg:p-6;
+    }
+    
+    .margin-responsive {
+        @apply m-2 sm:m-3 md:m-4 lg:m-6;
+    }
+}
+
+/* Mobile touch improvements */
+@media (max-width: 640px) {
+    .movie-scroll-container {
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+    }
+    
+    .movie-scroll-container > * {
+        scroll-snap-align: start;
+    }
+    
+    /* Improve button touch targets on mobile */
+    button {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    /* Better text rendering on mobile */
+    body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+}
+
+/* Tablet optimizations */
+@media (min-width: 641px) and (max-width: 1024px) {
+    .movie-scroll-container {
+        scroll-behavior: smooth;
+    }
 }

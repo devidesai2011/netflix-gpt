@@ -57,19 +57,19 @@ const GptSearchBar = () => {
 
     return (
         <div>
-            <div className='pt-[10%] flex justify-center'>
-                <form className='w-full max-w-4xl mx-4' onSubmit={(e) => e.preventDefault()}>
-                    <div className='bg-black bg-opacity-80 backdrop-blur-sm rounded-lg p-6 shadow-2xl border border-gray-700'>
-                        <div className='grid grid-cols-12 gap-4 items-center'>
+            <div className='pt-[15%] sm:pt-[12%] md:pt-[10%] flex justify-center'>
+                <form className='w-full max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-4xl mx-3 sm:mx-4' onSubmit={(e) => e.preventDefault()}>
+                    <div className='bg-black bg-opacity-80 backdrop-blur-sm rounded-lg p-4 sm:p-5 md:p-6 shadow-2xl border border-gray-700'>
+                        <div className='flex flex-col sm:grid sm:grid-cols-12 gap-3 sm:gap-4 items-center'>
                             <input
                                 ref={searchText}
                                 type="text"
-                                className="col-span-9 p-4 text-lg bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-200"
+                                className="w-full sm:col-span-8 md:col-span-9 p-3 sm:p-4 text-base sm:text-lg bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-200"
                                 placeholder={selectedLanguage?.placeHolder}
                             />
                             <button
                                 type="submit"
-                                className="col-span-3 py-4 px-6 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95"
+                                className="w-full sm:col-span-4 md:col-span-3 py-3 sm:py-4 px-4 sm:px-6 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 text-sm sm:text-base"
                                 onClick={handleSearchClick}
                             >
                                 {selectedLanguage?.search}
@@ -80,9 +80,9 @@ const GptSearchBar = () => {
 
                 {isLoading && (
                     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-                        <div className="bg-gray-900 rounded-lg p-8 flex flex-col items-center">
-                            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-500 mb-4"></div>
-                            <p className="text-white text-lg font-semibold">Searching for movies...</p>
+                        <div className="bg-gray-900 rounded-lg p-6 sm:p-8 flex flex-col items-center mx-4">
+                            <div className="animate-spin rounded-full h-10 w-10 sm:h-12 sm:w-12 border-b-2 border-red-500 mb-3 sm:mb-4"></div>
+                            <p className="text-white text-base sm:text-lg font-semibold text-center">Searching for movies...</p>
                         </div>
                     </div>
                 )}
